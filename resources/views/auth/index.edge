@@ -1,0 +1,9 @@
+@layout('layouts/app')
+
+@section('content')
+@each (movie in movies)
+   <h2>{{ movie.title }}</h2>
+   <p>{{ movie.tags }}</p>
+   <hr>
+@endeach
+@endsection

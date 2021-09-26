@@ -1,0 +1,41 @@
+@layout('layouts/app')
+@section('content')
+
+<div class="container">
+
+     <h1 class="title pt-3">Add Movies</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+      Title<label for="title"></label>
+      <input type="text" name="title" id="title" value="{{flashMessages.get('title') || ''}}">
+       @if(flashMessages.has('errors.title'))
+    <small class="text text-danger">{{ flashMessages.get('errors.title')}}</small>
+    @end 
+     </div>
+     <div class="form-group">
+      Tags<label for="tags"></label>
+      <input type="text" name="tags" id="tags" value="{{flashMessages.get('tags') || ''}}">
+       @if(flashMessages.has('errors.tags'))
+    <small class="text text-danger">{{ flashMessages.get('errors.tags')}}</small>
+    @end 
+     </div>
+     <div class="form-group">
+      Description<label for="description"></label>
+      <input type="text" name="description" id="description" value="{{flashMessages.get('description') || ''}}">
+       @if(flashMessages.has('errors.description'))
+    <small class="text text-danger">{{ flashMessages.get('errors.description')}}</small>
+    @end 
+     </div>
+    <div class="form-group">
+       Image<label for="image"></label>
+       <input type="file" name="image" class="form-control" >
+        @if(flashMessages.has('errors.image'))
+    <small class="text text-danger">{{ flashMessages.get('errors.image')}}</small>
+    @end 
+    </div>
+      <input type="submit" value="Save"  class="button">
+  </form>
+     
+   </div>
+
+@endsection

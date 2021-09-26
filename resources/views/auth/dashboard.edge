@@ -1,0 +1,68 @@
+@layout('layouts/app')
+
+@section('content')
+    <h1><strong>Dashboard</strong></h1>
+
+      @if(flashMessages.has('notification'))
+    <div class="notification alert alert-success">
+      {{ flashMessages.get('notification') }}
+    </div>
+  @endif
+    {{--  <h3>{{auth.user.email}}</h3>
+    <h3>{{auth.user.name}}</h3>  --}}
+    
+    {{--  {{auth.isAuthenticated}}  --}}
+        @if(auth.isAuthenticated)
+            <h1>{{auth.user.name}}</h1>
+        <form action="/logOut" method="post">
+          <div class="float-sm-right">
+            <button type="submit" class="btn btn-outline-warning">Log Out</button>
+          </div>
+        </form>  
+        @else
+        <a href="/logIn">Log In</a>  
+        @endif
+
+  <h1><center>All Movies</center></h1>
+<form action="/dashboard" method="GET" enctype="multipart/form-data">
+  <div class="container">
+    <div class="form-group">
+    <table class="table">
+      <thead>
+        <tr>
+          <th> ID </th>
+          <th> Title </th>
+          <th> Tags </th>
+          <th> Description </th>
+          <th> Image </th>
+          <th> Edit </th>
+          <th> Delete </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @each(movie in movies)
+         <tr>
+          <td> {{ movie.id }} </td>
+          <td> {{ movie.title }} </td>
+          <td> {{ movie.tags }} </td>
+          <td> {{ movie.description }} </td>
+          <td> <img src="/tmp/uploads/{{movie.image}}"
+             alt="image" height="150px" width="100%"></td>
+
+          <td> <a href="{{ route('MoviesController.show', { id: movie.id }) }}"
+             class="btn btn-sm btn-success">Edit</a> </td>
+          <td> <a href="{{ route('Movie.destroy', { id : movie.id }) }}"
+             class="btn btn-sm btn-danger">Delete</a>  </td>
+          
+        </tr>
+        @endeach
+       
+      </tbody>
+    </table>
+    </div>
+  </div>
+</form>
+  <a href="{{ route('MoviesController.store') }}" class="btn btn-sm btn-info">Create</a> 
+    
+@endsection

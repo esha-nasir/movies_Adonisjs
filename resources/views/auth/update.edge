@@ -1,0 +1,41 @@
+@layout('layouts/app')
+
+@section('content')
+<div class="container">
+   
+     <h1 class="title pt-3">Update Movies</h1>
+    <form action="{{ route('MoviesController.update', { id: movies.id }) }}"
+     method="post" enctype="multipart/form-data">
+    
+      <div class="form-group">
+      Title<label for="title"></label>
+      <input type="text" name="title" id="title" value="{{ movies.title }}">
+      @if(flashMessages.has('errors.title'))
+    <small class="text text-danger">{{ flashMessages.get('errors.title')}}</small>
+    @end 
+     </div>
+     <div class="form-group">
+      Tags<label for="tags"></label>
+      <input type="text" name="tags" id="tags" value="{{ movies.tags }}">
+        @if(flashMessages.has('errors.tags'))
+    <small class="text text-danger">{{ flashMessages.get('errors.tags')}}</small>
+    @end 
+     </div>
+     <div class="form-group">
+      Description<label for="description"></label>
+      <input type="text" name="description" id="description" value="{{ movies.description }}">
+    @if(flashMessages.has('errors.description'))
+    <small class="text text-danger">{{ flashMessages.get('errors.description')}}</small>
+    @end   
+   </div>
+    <div class="form-group">
+       Image<label for="image"></</label>
+       <input type="file" name="image" value="/tmp/uploads/{{movies.image}}"
+        class="form-control" >
+    </div>
+      <input type="submit" value="Save"  class="button">
+  </form>
+     
+   </div>
+   
+@endsection

@@ -1,0 +1,36 @@
+@layout('layouts/app')
+
+@section('content')
+
+  Welcome to crud App
+
+  @if(flashMessages.has('notification'))
+    <div class="notification alert alert-success">
+      {{ flashMessages.get('notification') }}
+    </div>
+  @endif
+
+
+
+  @if(flashMessages.has('error'))
+    <div class="notification alert alert-danger">
+      {{ flashMessages.get('error') }}
+    </div>
+  @endif
+{{--  {{auth.isAuthenticated}}
+@if(auth.isAuthenticated)
+<h1>{{auth.user.name}}</h1>
+<form action="/logOut" method="post">
+<button type="submit">Log Out</button>
+</form>  
+@else
+<a href="/logIn">Log In</a>  
+@endif  --}}
+
+<section>
+  <form action="/signUp" method="post"></form>
+  <a href="/signUp">Sign Up</a>  
+  <a href="/logIn">LogIn</a>  
+</section>
+
+@endsection
